@@ -217,6 +217,7 @@
     <rxjava.version>3.0.1</rxjava.version>
     <maven-failsafe-plugin.version>3.0.0-M6</maven-failsafe-plugin.version>
     <awaitility.version>4.0.3</awaitility.version>
+    <maven-failsafe-plugin.version>3.0.0-M6</maven-failsafe-plugin.version>
   </properties>
 
   <!-- dependency definitions -->
@@ -956,6 +957,14 @@
         <groupId>org.apache.maven.plugins</groupId>
         <artifactId>maven-failsafe-plugin</artifactId>
         <version>${maven-failsafe-plugin.version}</version>
+        <executions>
+          <execution>
+            <goals>
+              <goal>integration-test</goal>
+              <goal>verify</goal>
+            </goals>
+          </execution>
+        </executions>
       </plugin>
       <plugin>
         <groupId>org.apache.maven.plugins</groupId>
@@ -1320,7 +1329,7 @@
 
     <!-- JaCoCo profile -->
     <profile>
-      <id>Jacoco</id>
+      <id>jacoco</id>
       <build>
         <plugins>
           <plugin>
@@ -1340,7 +1349,7 @@
     </profile>
     <!-- PIT profile for mutation coverage -->
     <profile>
-      <id>Pit</id>
+      <id>pit</id>
       <!--<modules>
         <module>bookkeeper-common</module>
         <module>bookkeeper-server</module>
