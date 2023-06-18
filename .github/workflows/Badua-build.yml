@@ -27,7 +27,9 @@ jobs:
       - name: Clone and build ba-dua repository
         run: |
           git clone https://github.com/saeg/ba-dua
+          cd ba-dua
           mvn clean install
+          cd ..
       - name: Build and analyze bookkeeper project
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
