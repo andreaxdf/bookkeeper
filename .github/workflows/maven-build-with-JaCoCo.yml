@@ -18,6 +18,12 @@ jobs:
         with:
           java-version: 20
           distribution: 'temurin' # Alternative distribution options are available.
+      - name: Cache SonarCloud packages
+        uses: actions/cache@v3
+        with:
+          path: ~/.sonar/cache
+          key: ${{ runner.os }}-sonar
+          restore-keys: ${{ runner.os }}-sonar
       - name: Cache Maven packages
         uses: actions/cache@v3
         with:
@@ -28,10 +34,10 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}  # Needed to get PR information, if any
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: mvn clean verify -P jacoco
+        run: mvn clean verify org.sonarsource.scanner.maven:sonar-maven-plugin:sonar -Dsonar.projectKey=andreaxdf_bookkeeper -P jacoco
       - name: Upload report
         uses: actions/upload-artifact@v3
         with:
-          name: JaCoCoCoverage_Report
+          name: Report
           path: tests/target/site/jacoco-aggregate/
           if-no-files-found: error
