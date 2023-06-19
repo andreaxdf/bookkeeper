@@ -31,5 +31,5 @@ jobs:
       - name: Upload report
         uses: actions/upload-artifact@v3
         with:
-          name: PitMutationTesting_Report
+          name: Pit_Report
           path: bookkeeper-server/target/pit-reports
